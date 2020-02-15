@@ -3,14 +3,42 @@ title: "Data Visualization - Assignment 3"
 author: "Navishti Das"
 date: "2/8/2020"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r reading-data, include = TRUE, message=FALSE}
-library(readr)
-data <- read_csv("data.csv")
+```{r reading-data, include = TRUE, message=FALSE, warning=FALSE}
+library(haven)
+data <- read_stata("data.dta")
 ```
 
+``` {r loading-library, include = TRUE, message = FALSE}
+library(ggplot2)
+library(viridis)
+
+```
+
+```{r viz1}
+
+data$incgrp <- (factor(data$incgrp, levels = c("Low income", "Lower middle income", "Upper middle income", "High income")))
+
+ggplot(data = data, aes(x = year, y = mmratio,
+                 group = incgrp , color = incgrp))+
+  geom_line()+
+  theme_classic()+
+  labs(x = "Year",
+       y = "Maternal Mortality ratio, per 100,000 live births",
+       caption = "World Health Organization | Global Health Observatory data",
+       color = "Income grouping of countries")+
+  scale_color_manual(values = c("#E7B800", "#2E9FDF", "#FC4E07", "#FC9A40"))+
+  ggtitle("Maternal Mortality Ratio Over Time, By Country Income Groups") 
+```
+
+```{r viz1-comment, echo=FALSE}
+"This visualization shows that maternal mortality in low income countries continues to remain significantly higher than other groups, although the gap is reducing. Since 2010, maternal mortality in high and upper middle income countries has remained low and largely unchanged. Low income countries show the steepest decline in mortality over time."
+
+```
