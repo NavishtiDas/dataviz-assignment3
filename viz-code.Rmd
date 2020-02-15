@@ -104,7 +104,3 @@ ggplot(data4) +
   ggtitle("Prevalence of Anaemia in Pregnant Women")
 ```
 
-```{r viz4-comment, echo=FALSE}
-"The pattern of maternal mortality and low birthweight babies also repeats itself for anaemic pregnant women. Anaemia during pregnancy is considered a risk factor for low birthweight babies as well as risky pregnancies. Interestingly, the visualisation shows that eventhough the pattern holds, the difference between the lowest and highest income countries is not as wide as it is with other indicators I have explored above."
-```
-
