@@ -104,3 +104,5 @@ ggplot(data4) +
   ggtitle("Prevalence of Anaemia in Pregnant Women")
 ```
 
+``` {r, echo = FALSE}
+"The prevalence of anaemia amongst pregnant women is consistent with the pattern seen in the other indicators above. Anaemia during pregnancy is considered a risk factor causing maternal mortality as well as low birthweight babies. Interestingly, while the pattern is the same in this visualisation as in the above, the gap between the lowest and highest income countries is not as wide."
