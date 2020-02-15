@@ -84,3 +84,27 @@ ggplot(data3) +
 
 ```{r viz3-comment, echo=FALSE}
 "It can be expected that a country's income and MMR will be negatively correlated, such that as income increases, MMR decreases. This visualisation confirms this. While this is always true for high income countries, there are a few low and middle income countries that vary from this norm."
+```
+
+```{r viz4, message=FALSE}
+data4 <- data %>%
+  filter(year %in% 2015)
+
+ggplot(data4) +
+  geom_bar(aes(x = reorder(incgrp, -preganaemia), 
+               y = preganaemia), 
+           stat = "identity", 
+           fill = '#0099FF',
+           alpha = 0.5,
+           width = 0.8) +
+  theme_classic() +
+  coord_flip()+
+  labs(x = "", y = "% 15-49 year old women anaemic when pregnant",
+       caption = "World Health Organization | Global Health Observatory data") +
+  ggtitle("Prevalence of Anaemia in Pregnant Women")
+```
+
+```{r viz4-comment, echo=FALSE}
+"The pattern of maternal mortality and low birthweight babies also repeats itself for anaemic pregnant women. Anaemia during pregnancy is considered a risk factor for low birthweight babies as well as risky pregnancies. Interestingly, the visualisation shows that eventhough the pattern holds, the difference between the lowest and highest income countries is not as wide as it is with other indicators I have explored above."
+```
+
