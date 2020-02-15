@@ -18,7 +18,7 @@ data <- read_stata("data.dta")
 
 ``` {r loading-library, include = TRUE, message = FALSE}
 library(ggplot2)
-library(viridis)
+library(dplyr)
 
 ```
 
@@ -35,10 +35,31 @@ ggplot(data = data, aes(x = year, y = mmratio,
        caption = "World Health Organization | Global Health Observatory data",
        color = "Income grouping of countries")+
   scale_color_manual(values = c("#E7B800", "#2E9FDF", "#FC4E07", "#FC9A40"))+
-  ggtitle("Maternal Mortality Ratio Over Time, By Country Income Groups") 
+  ggtitle("Maternal Mortality Ratio Over Time, By Country Income Groups")+
+  scale_y_continuous(breaks = seq(0,600,100))
 ```
 
 ```{r viz1-comment, echo=FALSE}
 "This visualization shows that maternal mortality in low income countries continues to remain significantly higher than other groups, although the gap is reducing. Since 2010, maternal mortality in high and upper middle income countries has remained low and largely unchanged. Low income countries show the steepest decline in mortality over time."
 
 ```
+
+```{r viz2}
+
+data2 <- data %>%
+  filter(year %in% c(2010, 2015))
+
+ggplot(data2, aes(x = incgrp, y = lowbweight, 
+                  fill = year))+
+  geom_bar(stat = "identity",
+           position = position_dodge())+
+  theme_classic()+
+  labs(x = "",
+       y = "% new borns weighing less than 2.5 Kgs",
+       caption = "World Health Organization | Global Health Observatory data",
+       fill = "") +
+  ggtitle("% of low birthweight babies, by country income group and years")
+```
+
+``` {r viz2-comment, echo = FALSE}
+"Over the 5 year period between 2010 and 15, the incidence of low birth weight babies has barely changed for most income groups. The only noticeable change is among low income countries, similar to the pattern of changes seen in maternal mortality ratios above."
