@@ -64,3 +64,23 @@ ggplot(data2, aes(x = incgrp, y = lowbweight,
 
 ``` {r viz2-comment, echo = FALSE}
 "Over the 5 year period between 2010 and 15, the incidence of low birth weight babies has barely changed for most income groups. The only noticeable change is among low income countries, similar to the pattern of changes seen in maternal mortality ratios above."
+```
+
+```{r viz3, warning=FALSE, message=FALSE}
+data3 <- read_stata("data3.dta")
+
+data3$WorldBankIncomeGroup <- (factor(data3$WorldBankIncomeGroup, levels = c("Low income", "Lower middle income", "Upper middle income", "High income")))
+
+ggplot(data3) +
+  geom_point(aes(x = log(gdppc), y = mmr, color = WorldBankIncomeGroup)) +
+  geom_smooth(aes(x = log(gdppc), y = mmr), se=F) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(0, 14, 2)) +
+  labs(x = "Log GDP per capita", y = "Maternal Mortality Ratio, per 100,000 live births",
+       caption = "World Health Organization & World Bank",
+       color = "Income grouping of countries") +
+  ggtitle("Maternal Mortality Ratio by GDP per capita")
+```
+
+```{r viz3-comment, echo=FALSE}
+"It can be expected that a country's income and MMR will be negatively correlated, such that as income increases, MMR decreases. This visualisation confirms this. While this is always true for high income countries, there are a few low and middle income countries that vary from this norm."
